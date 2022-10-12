@@ -1,13 +1,13 @@
 plugins {
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.8'
-    id 'org.beryx.jlink' version '2.12.0'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'org.beryx.jlink' version '2.25.0'
     // https://github.com/openjfx/javafx-gradle-plugin/issues/90
-    // id 'org.openjfx.javafxplugin' version '0.0.9'
+    // id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
 javafx {
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
@@ -17,7 +17,7 @@ dependencies {
     implementation project(':classpy-bitcoin')
     implementation project(':classpy-wasm')
     // implementation project(':utilities')
-    // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.1'
+    // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
@@ -29,7 +29,7 @@ application {
 // https://stackoverflow.com/questions/51864473/where-do-resource-files-go-in-a-gradle-project-that-builds-a-java-9-module/51921521
 sourceSets {
     main {
-        output.setResourcesDir(java.outputDir)
+        output.setResourcesDir(java.classesDirectory)
     }
 }
 
@@ -37,6 +37,7 @@ sourceSets {
 // https://stackoverflow.com/questions/57452363/building-fatjar-for-javafx-with-gradle-and-intellij-getting-noclassdeffounderro
 // https://stackoverflow.com/questions/52569724/javafx-11-create-a-jar-file-with-gradle
 task fatJar(type: Jar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
         attributes 'Main-Class': 'com.github.zxh.classpy.gui.Main'
     }

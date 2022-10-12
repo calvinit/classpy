@@ -1,9 +1,9 @@
 subprojects {
-    version = '0.10.0'
+    version = '0.10.0-j17'
     group = 'classpy'
 
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     plugins.withType(JavaPlugin).configureEach {
